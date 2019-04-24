@@ -91,6 +91,8 @@ type ConfigInfo struct {
 	CaCert                string // Client Side CA
 	ClientCert            string // Client Side Cert
 	ClientKey             string // Client Side Key
+	MultiThreadCutoff     SizeSuffix
+	MultiThreadStreams    int
 }
 
 // NewConfig creates a new config with everything set to the default
@@ -120,6 +122,8 @@ func NewConfig() *ConfigInfo {
 	c.TPSLimitBurst = 1
 	c.MaxTransfer = -1
 	c.MaxBacklog = 10000
+	c.MultiThreadCutoff = SizeSuffix(100 * 1024 * 1024)
+	c.MultiThreadStreams = 4
 
 	return c
 }
